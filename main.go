@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	driver := storage.MySQL
+	driver := storage.Postgres
 	storage.New(driver)
 
 	// Creando migraciones
@@ -47,4 +47,10 @@ func main() {
 	for _, product := range products {
 		fmt.Printf("%d - %s\n", product.ID, product.Name)
 	}
+
+	// Leyendo un unico registro
+	myProduct := model.Product{}
+
+	storage.DB().First(&myProduct, 2)
+	fmt.Println(myProduct)
 }
