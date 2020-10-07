@@ -54,6 +54,7 @@ func main() {
 	storage.DB().First(&myProduct, 3)
 	fmt.Println(myProduct)
 
+	// Actualizando un resgitro parcialmente
 	myProduct.ID = 3
 
 	storage.DB().Model(&myProduct).Updates(
@@ -62,4 +63,21 @@ func main() {
 
 	storage.DB().First(&myProduct, 3)
 	fmt.Println(myProduct)
+
+	// Realizando borrado suave
+	// myProduct.ID = 3
+
+	// storage.DB().Delete(&myProduct)
+
+	// storage.DB().Find(&products)
+
+	// for _, product := range products {
+	// 	fmt.Printf("%d - %s\n", product.ID, product.Name)
+	// }
+
+	// Borrado permanente
+	myProduct = model.Product{}
+	myProduct.ID = 3
+
+	storage.DB().Unscoped().Delete(&myProduct)
 }
