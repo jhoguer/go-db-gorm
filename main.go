@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	driver := storage.Postgres
+	driver := storage.MySQL
 	storage.New(driver)
 
 	// Creando migraciones
@@ -51,6 +51,15 @@ func main() {
 	// Leyendo un unico registro
 	myProduct := model.Product{}
 
-	storage.DB().First(&myProduct, 2)
+	storage.DB().First(&myProduct, 3)
+	fmt.Println(myProduct)
+
+	myProduct.ID = 3
+
+	storage.DB().Model(&myProduct).Updates(
+		model.Product{Name: "Curso de Testing con Jest", Price: 130},
+	)
+
+	storage.DB().First(&myProduct, 3)
 	fmt.Println(myProduct)
 }
